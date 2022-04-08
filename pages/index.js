@@ -39,8 +39,7 @@ export default function Home() {
       <main className="bg-light py-4">
         <section className="container mx-auto px-12 ">
           <form className="py-8" onSubmit={(event) => handleSubmit(event)}>
-            <input type="search" placeholder="Search movie, TV shows or actors" value={searchterm} onChange={handleSearchTermChange} />
-            <button type="submit">{isLoading ? 'Loading...' : 'Submit'}</button>
+            <input type="search" className="w-full p-4 shadow-lg rounded transition-shadow focus:shadow-dark" placeholder="Search movie, TV shows or actors" value={searchterm} onChange={handleSearchTermChange} />
           </form>
 
           <Results results={results}></Results>
