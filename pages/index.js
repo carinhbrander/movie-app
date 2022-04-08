@@ -30,22 +30,27 @@ export default function Home() {
         <title>The Movie Finder</title>
         <meta name="description" content="The best movie app ever" />
       </Head>
-
-      <main>
-        <h1>
+    <div className="text-dark flex flex-col ">
+      <header className="container mx-auto bg-white py-4">
+        <h1 className="text-lg font-bold">
           The Movie Finder
         </h1>
-        <form onSubmit={(event) => handleSubmit(event)}>
-          <input type="search" placeholder="Search movie, TV shows or actors" value={searchterm} onChange={handleSearchTermChange} />
-          <button type="submit">{isLoading ? 'Loading...' : 'Submit'}</button>
-        </form>
+      </header>
+      <main className="bg-light py-4">
+        <section className="container mx-auto px-12 ">
+          <form className="py-8" onSubmit={(event) => handleSubmit(event)}>
+            <input type="search" placeholder="Search movie, TV shows or actors" value={searchterm} onChange={handleSearchTermChange} />
+            <button type="submit">{isLoading ? 'Loading...' : 'Submit'}</button>
+          </form>
 
-        <Results results={results}></Results>
+          <Results results={results}></Results>
+        </section>
       </main>
 
-      <footer>
-        <a href="https://carinh.se/">Carin H Brander - Your friendly neighborhood dev</a>
+      <footer className="bg-dark text-light py-8 text-center">
+        <a href="https://carinh.se/">The Movie Finder</a>
       </footer>
+      </div>
     </div>
   )
 }
