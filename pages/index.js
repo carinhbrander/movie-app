@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import { loadConfig } from '../lib/apiconfig'
 import Results from '../components/results'
 
-export default function Home() {
+function Home({apiconfig}) {
   const [results, setResults] = useState([])
   const [isLoading, setLoading] = useState(false)
   const [searchterm, setSearchTerm] = useState('')
@@ -42,7 +43,7 @@ export default function Home() {
             <input type="search" className="w-full p-4 shadow-lg rounded transition-shadow focus:shadow-dark" placeholder="Search movie, TV shows or actors" value={searchterm} onChange={handleSearchTermChange} />
           </form>
 
-          <Results results={results}></Results>
+          <Results results={results} baseurl={apiconfig.images.secure_base_url}></Results>
         </section>
       </main>
 
@@ -53,3 +54,12 @@ export default function Home() {
     </div>
   )
 }
+
+export async function getStaticProps(context) {
+  const apiconfig = await loadConfig();
+  return {
+    props: {apiconfig}
+  }
+}
+
+export default Home
