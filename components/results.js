@@ -52,7 +52,7 @@ export default function Results({ results, baseurl }) {
         <ScrollMenu
           LeftArrow={LeftArrow}
           RightArrow={RightArrow}
-          scrollContainerClassName="gap-2 no-scrollbar container">
+          scrollContainerClassName="gap-2 no-scrollbar container mx-4 md:mx-0">
           {results.map((result) => (
             <Card
               itemId={result.id.toString()}

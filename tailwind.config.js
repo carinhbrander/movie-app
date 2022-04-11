@@ -4,6 +4,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    container: {
+      center: true
+    },
     extend: {
       colors: {
         'blue': 'rgb(6, 104, 251)',
