@@ -52,7 +52,12 @@ function Home({ apiconfig }) {
               <button type="submit" className="absolute left-0 inset-y-0 p-4"><SearchIcon className="block w-5" /></button>
             </form>
           </section>
-          {apiconfig &&
+          {isLoading &&
+            <section className="container">
+              <div className="motion-safe:animate-pulse text-2xl font-medium text-center">Loading...</div>
+            </section>
+          }
+          {apiconfig && !isLoading &&
             <Results results={results} baseurl={apiconfig.images.secure_base_url}></Results>
           }
         </main>
