@@ -44,6 +44,7 @@ function Home({ apiconfig }) {
             <form className="relative" onSubmit={(event) => handleSubmit(event)} role="search">
               <input
                 type="search"
+                required="required"
                 className="w-full py-4 pl-12 shadow-lg rounded transition-shadow focus:shadow-dark"
                 placeholder="Search movie, TV shows or actors"
                 value={searchterm}
