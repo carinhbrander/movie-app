@@ -8,6 +8,7 @@ function Home({ apiconfig }) {
   const [results, setResults] = useState([])
   const [isLoading, setLoading] = useState(false)
   const [hasSearched, setHasSearched] = useState(false)
+  const [searchError, setSearchError] = useState(false)
   const [searchterm, setSearchTerm] = useState('')
 
   function handleSearchTermChange(event) {
@@ -17,14 +18,24 @@ function Home({ apiconfig }) {
   async function handleSubmit(event) {
     event.preventDefault()
     setLoading(true)
+    setSearchError(false)
     setHasSearched(true)
     fetch(`api/search?searchterm=${searchterm}`)
-      .then((res) => res.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not OK')
+        }
+        return response.json()
+      })
       .then((data) => {
         if (data.results) {
           setResults(data.results)
         }
         setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false)
+        setSearchError(true)
       })
   }
 
@@ -52,12 +63,22 @@ function Home({ apiconfig }) {
                 value={searchterm}
                 onChange={handleSearchTermChange}
               />
-              <button type="submit" className="absolute left-0 inset-y-0 p-4"><SearchIcon className="block w-5" /></button>
+              <button type="submit" disabled={!apiconfig.images || isLoading} className="absolute left-0 inset-y-0 p-4"><SearchIcon className="block w-5" /></button>
             </form>
           </section>
           {isLoading &&
             <section className="container">
               <div className="motion-safe:animate-pulse text-2xl font-medium text-center">Loading...</div>
+            </section>
+          }
+          {searchError &&
+            <section className="container bg-red-100 p-7 mb-4 border border-3 border-solid border-red-900">
+              <div className="text-red-900">Something went wrong. Please try again.</div>
+            </section>
+          }
+          {!apiconfig.images &&
+            <section className="container bg-red-100 p-7 mb-4 border border-3 border-solid border-red-900">
+              <div className="text-red-900">Configuration failed to load. Please try again.</div>
             </section>
           }
           {apiconfig && hasSearched && !isLoading &&
