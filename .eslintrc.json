@@ -3,6 +3,7 @@
   "rules": {
     "semi": ["error", "never"],
     "comma-dangle": ["error", "never"],
-    "eol-last": ["error", "never"]
+    "eol-last": ["error", "never"],
+    "indent": ["error", 2]
   }
 }
