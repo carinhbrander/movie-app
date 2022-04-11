@@ -7,6 +7,7 @@ import Results from '../components/results'
 function Home({ apiconfig }) {
   const [results, setResults] = useState([])
   const [isLoading, setLoading] = useState(false)
+  const [hasSearched, setHasSearched] = useState(false)
   const [searchterm, setSearchTerm] = useState('')
 
   function handleSearchTermChange(event) {
@@ -16,6 +17,7 @@ function Home({ apiconfig }) {
   async function handleSubmit(event) {
     event.preventDefault()
     setLoading(true)
+    setHasSearched(true)
     fetch(`api/search?searchterm=${searchterm}`)
       .then((res) => res.json())
       .then((data) => {
@@ -58,7 +60,7 @@ function Home({ apiconfig }) {
               <div className="motion-safe:animate-pulse text-2xl font-medium text-center">Loading...</div>
             </section>
           }
-          {apiconfig && !isLoading &&
+          {apiconfig && hasSearched && !isLoading &&
             <Results results={results} baseurl={apiconfig.images.secure_base_url}></Results>
           }
         </main>
