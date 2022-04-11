@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import { SearchIcon } from '@heroicons/react/outline'
 import { loadConfig } from '../lib/apiconfig'
 import Results from '../components/results'
 
@@ -39,9 +40,16 @@ function Home({ apiconfig }) {
           </h1>
         </header>
         <main className="bg-light grow">
-          <section className="container px-4 md:px-0 ">
-            <form className="py-8 md:py-12" onSubmit={(event) => handleSubmit(event)} role="search">
-              <input type="search" className="w-full p-4 shadow-lg rounded transition-shadow focus:shadow-dark" placeholder="Search movie, TV shows or actors" value={searchterm} onChange={handleSearchTermChange} />
+          <section className="container px-4 md:px-0 py-8 md:py-12">
+            <form className="relative" onSubmit={(event) => handleSubmit(event)} role="search">
+              <input
+                type="search"
+                className="w-full py-4 pl-12 shadow-lg rounded transition-shadow focus:shadow-dark"
+                placeholder="Search movie, TV shows or actors"
+                value={searchterm}
+                onChange={handleSearchTermChange}
+              />
+              <button type="submit" className="absolute left-0 inset-y-0 p-4"><SearchIcon className="block w-5" /></button>
             </form>
           </section>
           {apiconfig &&
