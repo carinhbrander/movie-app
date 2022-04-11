@@ -30,7 +30,7 @@ export default function Results({ results, baseurl }) {
     const visibility = React.useContext(VisibilityContext)
 
     return (
-      <div className="card w-48">
+      <div className="bg-white p-4 border border-solid rounded h-full w-48">
         <Image
           alt={result.title || result.name}
           className="rounded shadow"
